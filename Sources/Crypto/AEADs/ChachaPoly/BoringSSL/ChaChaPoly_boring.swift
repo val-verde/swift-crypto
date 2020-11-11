@@ -163,8 +163,8 @@ extension BoringSSLAEAD.AEADContext {
 
         guard rc == 1 else {
             // Ooops, error. Free the memory we allocated before we throw.
-            free(outputBuffer.baseAddress)
-            free(tagBuffer.baseAddress)
+            outputBuffer.baseAddress?.deallocate()
+            tagBuffer.baseAddress?.deallocate()
             throw CryptoKitError.internalBoringSSLError()
         }
 
@@ -227,7 +227,7 @@ extension BoringSSLAEAD.AEADContext {
 
         guard rc == 1 else {
             // Ooops, error. Free the memory we allocated before we throw.
-            free(outputBuffer.baseAddress)
+            outputBuffer.baseAddress?.deallocate()
             throw CryptoKitError.internalBoringSSLError()
         }
 
